@@ -19,3 +19,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# API key and secret stored in API_CONFIG
+.API_CONFIG.js
+API_CONFIG.js
