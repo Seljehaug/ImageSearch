@@ -1,8 +1,10 @@
 <template>
    <div id="app">
-      <SearchBar :searchText="searchText" v-on:getSearchText="fetchImages($event)"/>
-      <ImageGrid :images="images"/>
-      <ImageDetails msg="Image here.."/>
+      <div class="inner">
+         <SearchBar :searchText="searchText" v-on:getSearchText="fetchImages($event)"/>
+         <ImageGrid :images="images"/>
+         <ImageDetails/>
+      </div>
    </div>
 </template>
 
@@ -44,9 +46,10 @@
             callbackUrl: ""
          });
 
-         this.unsplash.photos.listPhotos(1, 20, "latest").then(res => {
-            res.json().then(data => {
-               console.log(data);
+         this.unsplash.photos.listPhotos(1, 50, "latest").then(res => {
+            res.json().then(images => {
+               this.images = images;
+               console.log(this.images);
             });
          });
       },
@@ -54,18 +57,29 @@
       methods: {
          fetchImages: function(text){
             this.searchText = text;
+
+            this.unsplash.search.photos(this.searchText, 1, 50).then(res => {
+               res.json().then(data => {
+                  this.images = data.results;
+               });
+            })
          }
       }
    };
 </script>
 
-<style>
+<style lang="scss">
+   @import '~normalize-scss/sass/normalize/_import-now.scss';
+
    #app {
       font-family: 'Avenir', Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      text-align: center;
-      color: #2c3e50;
-      margin-top: 60px;
+   }
+
+   .inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      width: calc(100% - 1rem);
    }
 </style>

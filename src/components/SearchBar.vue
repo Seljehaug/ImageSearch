@@ -1,6 +1,13 @@
 <template>
    <div id="search-bar">
-      {{ searchText }}
+      <form v-on:submit.prevent="updateSearchText">
+         <input type="text" placeholder="Search for something...">
+         <!-- <input type="submit">
+
+         </input> -->
+      </form>
+
+      
    </div>
 </template>
 
@@ -10,10 +17,23 @@
       props: {
          searchText: String
       },
-      created() {
-         const text = "Updated";
 
-         this.$emit('getSearchText', text);
+      // data(){
+      //    return {
+      //       inputText: null
+      //    }
+      // },
+
+      created() { 
+      
+      },
+      
+      methods: {
+         updateSearchText: function(){
+            const searchField = document.querySelector('#search-bar input');
+
+            this.$emit('getSearchText', searchField.value);
+         }
       }
    }
 </script>

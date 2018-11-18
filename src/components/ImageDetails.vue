@@ -1,6 +1,6 @@
 <template>
    <div class="image">
-      {{ msg }}
+      <!-- {{ msg }} -->
    </div>
 </template>
 
