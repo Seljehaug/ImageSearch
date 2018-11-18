@@ -1,4 +1,4 @@
-# lightbox
+# Image search with Unsplash API
 
 ## Project setup
 ```
