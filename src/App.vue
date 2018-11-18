@@ -1,6 +1,7 @@
 <template>
    <div id="app">
       <div class="inner">
+         <Header/>
          <SearchBar :searchText="searchText" v-on:getSearchText="fetchImages($event)"/>
          <ImageGrid :images="images"/>
          <ImageDetails/>
@@ -13,7 +14,8 @@
    import API_CONFIG from '../API_CONFIG.js';
    import Unsplash from 'unsplash-js';
    
-   // Components 
+   // Components
+   import Header from './components/Header.vue';
    import SearchBar from './components/SearchBar.vue';
    import ImageGrid from './components/ImageGrid.vue';
    import ImageDetails from './components/ImageDetails.vue';
@@ -21,6 +23,7 @@
    export default {
       name: 'app',
       components: {
+         Header,
          SearchBar,
          ImageGrid,
          ImageDetails
@@ -62,7 +65,7 @@
                res.json().then(data => {
                   this.images = data.results;
                });
-            })
+            });
          }
       }
    };
@@ -70,6 +73,12 @@
 
 <style lang="scss">
    @import '~normalize-scss/sass/normalize/_import-now.scss';
+
+   * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+   }
 
    #app {
       font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -80,6 +89,8 @@
    .inner {
       max-width: 1600px;
       margin: 0 auto;
-      width: calc(100% - 1rem);
+      // width: calc(100% - 1rem);
+      width: 100%;
+      // padding: 0.5rem;s
    }
 </style>

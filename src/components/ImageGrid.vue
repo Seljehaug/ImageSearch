@@ -14,7 +14,7 @@
       props: {
          images: Array
       }
-   }
+   };
 </script>
 
 <style scoped lang="scss">
@@ -22,6 +22,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       grid-gap: 0.5rem;
+      padding: 0 0.5rem 0.5rem 0.5rem;
 
       .image-wrapper {
          border: 1px solid white;
