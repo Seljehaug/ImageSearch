@@ -1,8 +1,11 @@
 <template>
    <div id="image-grid">
       
-      <div class="image-wrapper" v-for="image in images" :key="image.id">
-         <div class="image" :style="{'background-image': `url(${image.urls.small})`}"></div>
+      <div class="image-wrapper" v-for="(image, index) in images" :key="image.id">
+         <div class="image" :data-image-position="index" 
+            :style="{'background-image': `url(${image.urls.small})`}"
+            v-on:click="getImagePosition($event)">
+         </div>
       </div>
 
    </div>
@@ -12,7 +15,15 @@
    export default {
       name: 'ImageGrid',
       props: {
-         images: Array
+         images: Array,
+         activeImage: String
+      },
+
+      methods: {
+         // Update the active LightBox image to the clicked image's position in the images array 
+         getImagePosition: function(event) {
+            this.$emit('getImagePosition', event.target.dataset.imagePosition);
+         }
       }
    };
 </script>

@@ -5,7 +5,6 @@
             <input class="search-field" type="text" placeholder="Search...">
             <label>
                <input class="search-btn" type="submit">
-
                <svg class="search-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                   width="612.08px" height="612.08px" viewBox="0 0 612.08 612.08" style="enable-background:new 0 0 612.08 612.08;"
                   xml:space="preserve">
@@ -45,8 +44,7 @@
                   <g>
                   </g>
                   <g>
-                  </g>
-               </svg>
+                  </g></svg>
             </label>
          </form>
       </div>
@@ -103,6 +101,8 @@
          background: #39425c;
          color: #e8eeff;
          border: 1px solid #39425c;
+         border-top-left-radius: 3px;
+         border-bottom-left-radius: 3px;
 
          &:focus {
             outline: none; 
@@ -129,6 +129,8 @@
          background: #a8b6db;
          color: #a8b6db;
          border: none;
+         border-top-right-radius: 3px;
+         border-bottom-right-radius: 3px;
 
          &:focus, &:hover {
             background: #39425c;

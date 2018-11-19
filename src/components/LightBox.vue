@@ -6,16 +6,16 @@
 
 <script>
    export default {
-      name: 'ImageDetails',
+      name: 'LightBox',
       props: {
          msg: String
       },
       data() {
          return {
 
-         }
+         };
       }
-   }
+   };
 </script>
 
 <style scoped>

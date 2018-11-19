@@ -3,8 +3,8 @@
       <div class="inner">
          <Header/>
          <SearchBar :searchText="searchText" v-on:getSearchText="fetchImages($event)"/>
-         <ImageGrid :images="images"/>
-         <ImageDetails/>
+         <ImageGrid :images="images" :activeImage="activeLightBoxImage" v-on:getImagePosition="setActiveLightBoxImage($event)"/>
+         <LightBox/>
       </div>
    </div>
 </template>
@@ -18,7 +18,7 @@
    import Header from './components/Header.vue';
    import SearchBar from './components/SearchBar.vue';
    import ImageGrid from './components/ImageGrid.vue';
-   import ImageDetails from './components/ImageDetails.vue';
+   import LightBox from './components/LightBox.vue';
 
    export default {
       name: 'app',
@@ -26,7 +26,7 @@
          Header,
          SearchBar,
          ImageGrid,
-         ImageDetails
+         LightBox
       },
       
       data: function() {
@@ -35,7 +35,8 @@
             API_SECRET: null,
             images: [],
             searchText: null,
-            unsplash: null
+            unsplash: null,
+            activeLightBoxImage: null
          };
       },
       
@@ -66,6 +67,11 @@
                   this.images = data.results;
                });
             });
+         },
+
+         setActiveLightBoxImage: function(imagePos){
+            console.log(imagePos);
+            this.activeLightBoxImage = imagePos;
          }
       }
    };
