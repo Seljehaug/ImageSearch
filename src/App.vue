@@ -3,8 +3,8 @@
       <div class="inner">
          <Header/>
          <SearchBar :searchText="searchText" v-on:getSearchText="fetchImages($event)"/>
-         <ImageGrid :images="images" :activeImage="activeLightBoxImage" v-on:getImagePosition="setActiveLightBoxImage($event)"/>
-         <LightBox/>
+         <ImageGrid :images="images"/>
+         <!-- <LightBox :images="images" :activeImage="activeLightBoxImage"/> -->
       </div>
    </div>
 </template>
@@ -13,12 +13,12 @@
    // Unsplash API
    import API_CONFIG from '../API_CONFIG.js';
    import Unsplash from 'unsplash-js';
-   
+
    // Components
    import Header from './components/Header.vue';
    import SearchBar from './components/SearchBar.vue';
    import ImageGrid from './components/ImageGrid.vue';
-   import LightBox from './components/LightBox.vue';
+   // import LightBox from './components/LightBox.vue';
 
    export default {
       name: 'app',
@@ -26,9 +26,9 @@
          Header,
          SearchBar,
          ImageGrid,
-         LightBox
+         // LightBox
       },
-      
+
       data: function() {
          return {
             API_KEY: null,
@@ -39,7 +39,7 @@
             activeLightBoxImage: null
          };
       },
-      
+
       created() {
          this.API_KEY = API_CONFIG.API_KEY;
          this.API_SECRET = API_CONFIG.API_SECRET;
@@ -67,11 +67,6 @@
                   this.images = data.results;
                });
             });
-         },
-
-         setActiveLightBoxImage: function(imagePos){
-            console.log(imagePos);
-            this.activeLightBoxImage = imagePos;
          }
       }
    };

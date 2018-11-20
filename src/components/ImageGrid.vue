@@ -4,25 +4,49 @@
       <div class="image-wrapper" v-for="(image, index) in images" :key="image.id">
          <div class="image" :data-image-position="index" 
             :style="{'background-image': `url(${image.urls.small})`}"
-            v-on:click="getImagePosition($event)">
+            v-on:click="openLightBox($event)">
          </div>
       </div>
+
+      <LightBox :images="images" :activeImagePos="activeImagePos" :lightBoxIsActive="lightBoxIsActive" v-on:closeLightBox="closeLightBox($event)"/>
 
    </div>
 </template>
 
 <script>
+   import LightBox from './LightBox.vue';
+
    export default {
       name: 'ImageGrid',
-      props: {
-         images: Array,
-         activeImage: String
+      
+      components: {
+         LightBox
       },
-
+      
+      props: {
+         images: Array
+      },
+      
+      data() {
+         return {
+            activeImagePos: null,
+            lightBoxIsActive: false
+         }
+      },
+      
       methods: {
-         // Update the active LightBox image to the clicked image's position in the images array 
-         getImagePosition: function(event) {
-            this.$emit('getImagePosition', event.target.dataset.imagePosition);
+         openLightBox: function(event) {
+            const imagePos = parseInt(event.target.dataset.imagePosition); 
+            this.activeImagePos = imagePos; 
+
+            if(this.activeImagePos !== null){
+               this.lightBoxIsActive = true;
+            }
+         },
+
+         closeLightBox: function(status){
+            console.log(status)
+            this.lightBoxIsActive = status;
          }
       }
    };
