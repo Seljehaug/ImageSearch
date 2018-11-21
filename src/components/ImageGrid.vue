@@ -8,7 +8,10 @@
          </div>
       </div>
 
-      <LightBox :images="images" :activeImagePos="activeImagePos" :lightBoxIsActive="lightBoxIsActive" v-on:closeLightBox="closeLightBox($event)"/>
+      <LightBox :images="images" :activeImagePos="activeImagePos" :activeImage="activeImage" :lightBoxIsActive="lightBoxIsActive" 
+         v-on:closeLightBox="closeLightBox($event)"
+         v-on:prevImage="prevImage"
+         v-on:nextImage="nextImage"/>
 
    </div>
 </template>
@@ -30,16 +33,19 @@
       data() {
          return {
             activeImagePos: null,
-            lightBoxIsActive: false
+            lightBoxIsActive: false,
+            activeImage: null
          }
       },
       
       methods: {
          openLightBox: function(event) {
             const imagePos = parseInt(event.target.dataset.imagePosition); 
+            
             this.activeImagePos = imagePos; 
-
-            if(this.activeImagePos !== null){
+            this.activeImage = this.images[imagePos];
+   
+            if(this.activeImage !== null){
                this.lightBoxIsActive = true;
             }
          },
@@ -47,6 +53,20 @@
          closeLightBox: function(status){
             console.log(status)
             this.lightBoxIsActive = status;
+         },
+
+         prevImage: function(){
+            // TODO: exception for when clicking previous on the first image
+
+            this.activeImagePos = this.activeImagePos - 1;
+            this.activeImage = this.images[this.activeImagePos];
+         },
+
+         nextImage: function(){
+            // TODO: exception for when clicking next on the last image
+
+            this.activeImagePos = this.activeImagePos + 1;
+            this.activeImage = this.images[this.activeImagePos];
          }
       }
    };

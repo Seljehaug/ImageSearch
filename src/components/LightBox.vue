@@ -1,13 +1,13 @@
 <template>
-   <div id="light-box" :class="lightBoxClass" 
-   >
-   <!-- :style="{'background-image': `url(${backgroundImage})`}" -->
+   <div id="light-box" :class="lightBoxClass">
       
-         <img :src="backgroundImage" alt="">
-         
-         <button v-on:click="closeLightBox" class="close">Close</button>
+      <div class="overlay"></div>
 
-         <div class="overlay"></div>
+      <button v-on:click="prevImage" class="previous">Previous</button>
+      <img :src="backgroundImage" alt="">
+      <button v-on:click="nextImage" class="next">Next</button>
+
+      <button v-on:click="closeLightBox" class="close">Close</button>
 
    </div>
 </template>
@@ -18,19 +18,26 @@
       props: {
          images: Array,
          activeImagePos: Number,
-         lightBoxIsActive: Boolean
+         lightBoxIsActive: Boolean,
+         activeImage: Object
       },
 
       methods: {
          closeLightBox: function(){
             this.$emit('closeLightBox', false);
+         },
+         prevImage: function(){
+            this.$emit('prevImage');
+         },
+         nextImage: function(){
+            this.$emit('nextImage');
          }
       },
 
       computed: {
          backgroundImage: function() {
-            return (this.lightBoxIsActive && this.activeImagePos !== null) 
-               ? this.images[this.activeImagePos].urls.regular 
+            return (this.lightBoxIsActive && this.activeImage !== null) 
+               ? this.activeImage.urls.regular 
                : "";
          },
          lightBoxClass: function(){
@@ -48,11 +55,8 @@
       right: 2rem;
       bottom: 2rem;
       background: transparent;
-      border: 1px solid black;
       z-index: 100;
       background-size: cover;
-      max-width: 800px;
-      margin: 0 auto;
 
       &.lightbox-active {
          display: flex;
@@ -65,17 +69,44 @@
       }
 
       img {
+         min-width: 400px;
          max-width: 100%;
          max-height: 100%;
+         z-index: 100;
+         background: black;
+         padding: 1rem;
       }
    }
 
-   // .overlay {
-   //    position: fixed;
-   //    top: 0;
-   //    right: 0;
-   //    bottom: 0;
-   //    left: 0;
-   //    background: black;
-   // }
+   .light-box-content {
+      z-index: 100;
+      max-width: 100%;
+      max-height: 100%;
+   }
+
+   .overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: black;
+      opacity: 0.8;
+   }
+
+   .previous, .next {
+      z-index: 100;
+      height: 100%;
+      width: 100px;
+      background-color: black;
+      color: white;
+      border: none;
+   }
+
+   .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 100;
+   }
 </style>
