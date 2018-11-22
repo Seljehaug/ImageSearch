@@ -22,16 +22,8 @@
          activeImage: Object
       },
 
-      methods: {
-         closeLightBox: function(){
-            this.$emit('closeLightBox', false);
-         },
-         prevImage: function(){
-            this.$emit('prevImage');
-         },
-         nextImage: function(){
-            this.$emit('nextImage');
-         }
+      created() {
+         document.addEventListener('keyup', this.handleKeyUp);
       },
 
       computed: {
@@ -42,6 +34,57 @@
          },
          lightBoxClass: function(){
             return this.lightBoxIsActive ? "lightbox-active" : "lightbox-inactive";
+         }
+      },
+
+      methods: {
+         closeLightBox: function(){
+            this.$emit('closeLightBox', false);
+         },
+         prevImage: function(){
+            this.$emit('prevImage');
+         },
+         nextImage: function(){
+            this.$emit('nextImage');
+         },
+         handleKeyUp: function(event) {
+            if(!this.lightBoxIsActive) return; 
+            
+            if (event.key !== undefined) {
+               const key = event.key; 
+
+               switch(key){
+                  case 'ArrowLeft':
+                     this.prevImage();
+                     break;
+                  case 'ArrowRight':
+                     this.nextImage();
+                     break;
+                  case 'Escape':
+                     this.closeLightBox();
+                     break;
+                  default: 
+                     break;
+               } 
+            }
+
+            else if (event.keyCode !== undefined) {
+               const keyCode = event.keyCode;
+
+               switch(keyCode){
+                  case 37:
+                     this.prevImage();
+                     break;
+                  case 39:
+                     this.nextImage();
+                     break;
+                  case 27:
+                     this.closeLightBox();
+                     break;
+                  default: 
+                     break;
+               } 
+            }
          }
       }
    };

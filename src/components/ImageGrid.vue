@@ -35,7 +35,7 @@
             activeImagePos: null,
             lightBoxIsActive: false,
             activeImage: null
-         }
+         };
       },
       
       methods: {
@@ -51,21 +51,22 @@
          },
 
          closeLightBox: function(status){
-            console.log(status)
             this.lightBoxIsActive = status;
          },
 
          prevImage: function(){
-            // TODO: exception for when clicking previous on the first image
+            this.activeImagePos = this.activeImagePos === 0 
+               ? this.images.length -1 
+               : this.activeImagePos -1;
 
-            this.activeImagePos = this.activeImagePos - 1;
             this.activeImage = this.images[this.activeImagePos];
          },
 
          nextImage: function(){
-            // TODO: exception for when clicking next on the last image
+            this.activeImagePos = this.activeImagePos === this.images.length - 1
+               ? 0 
+               : this.activeImagePos + 1;
 
-            this.activeImagePos = this.activeImagePos + 1;
             this.activeImage = this.images[this.activeImagePos];
          }
       }

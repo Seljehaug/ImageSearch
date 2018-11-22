@@ -4,7 +4,6 @@
          <Header/>
          <SearchBar :searchText="searchText" v-on:getSearchText="fetchImages($event)"/>
          <ImageGrid :images="images"/>
-         <!-- <LightBox :images="images" :activeImage="activeLightBoxImage"/> -->
       </div>
    </div>
 </template>
@@ -18,15 +17,13 @@
    import Header from './components/Header.vue';
    import SearchBar from './components/SearchBar.vue';
    import ImageGrid from './components/ImageGrid.vue';
-   // import LightBox from './components/LightBox.vue';
 
    export default {
       name: 'app',
       components: {
          Header,
          SearchBar,
-         ImageGrid,
-         // LightBox
+         ImageGrid
       },
 
       data: function() {
@@ -53,7 +50,6 @@
          this.unsplash.photos.listPhotos(1, 50, "latest").then(res => {
             res.json().then(images => {
                this.images = images;
-               console.log(this.images);
             });
          });
       },
