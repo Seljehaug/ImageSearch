@@ -77,7 +77,6 @@
       align-items: center;
       justify-content: center;
       margin: 0 0 0.5rem 0;
-      background-color: rgba(57, 66, 92, 0.95);
       background-color: rgba(67, 84, 133, 0.95);
 
       .search-bar-wrapper {
@@ -131,6 +130,7 @@
          border: none;
          border-top-right-radius: 3px;
          border-bottom-right-radius: 3px;
+         font-size: 0;
 
          &:focus, &:hover {
             background: #39425c;
@@ -150,9 +150,7 @@
          position: absolute;
          right: 10px;
          top: 10px;
-
          pointer-events: none;
-
          fill: #39425c;
       }
    }

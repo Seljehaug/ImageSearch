@@ -23,7 +23,7 @@
       },
 
       created() {
-         document.addEventListener('keyup', this.handleKeyUp);
+         window.addEventListener('keyup', this.handleKeyUp);
       },
 
       computed: {

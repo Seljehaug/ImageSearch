@@ -13,6 +13,10 @@
    import API_CONFIG from '../API_CONFIG.js';
    import Unsplash from 'unsplash-js';
 
+   // Polyfills 
+   import 'promise-polyfill/src/polyfill';
+   import 'whatwg-fetch';
+
    // Components
    import Header from './components/Header.vue';
    import SearchBar from './components/SearchBar.vue';

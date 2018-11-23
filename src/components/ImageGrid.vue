@@ -75,14 +75,15 @@
 
 <style scoped lang="scss">
    #image-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-gap: 0.5rem;
-      padding: 0 0.5rem 0.5rem 0.5rem;
+      // Flexbox fallback for browsers not supporting grid 
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
 
       .image-wrapper {
          border: 1px solid white;
          height: 200px;
+         min-width: 200px;
          position: relative;
 
          .image {
@@ -95,4 +96,14 @@
          }
       }
    }
+   
+   @supports(display: grid){
+      #image-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+         grid-gap: 0.5rem;
+         padding: 0 0.5rem 0.5rem 0.5rem;
+      }
+   }
+  
 </style>
