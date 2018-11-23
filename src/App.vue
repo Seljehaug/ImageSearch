@@ -2,7 +2,7 @@
    <div id="app">
       <div class="inner">
          <Header/>
-         <SearchBar :searchText="searchText" v-on:getSearchText="fetchImages($event)"/>
+         <SearchBar :searchText="searchText" v-on:getSearchText="showSearchResults($event)"/>
          <ImageGrid :images="images"/>
       </div>
    </div>
@@ -51,22 +51,43 @@
             callbackUrl: ""
          });
 
-         this.unsplash.photos.listPhotos(1, 50, "latest").then(res => {
-            res.json().then(images => {
-               this.images = images;
-            });
-         });
+         this.fetchMultiplePages(5, 30, 'popular');
+         console.log(this.images);
       },
 
       methods: {
-         fetchImages: function(text){
+         showSearchResults: function(text){
             this.searchText = text;
+            this.fetchMultiplePagesBySearch(5, 30);
+         },
 
-            this.unsplash.search.photos(this.searchText, 1, 50).then(res => {
-               res.json().then(data => {
-                  this.images = data.results;
+         // Unsplash API gives a maximum of 30 results per page 
+         // pages = amount of pages
+         // Possible categories: 'latest, oldest, popular'
+         fetchMultiplePages: function(pages, imagesPerPage, category){
+            for(let i = 1; i <= pages; i++){
+               this.unsplash.photos.listPhotos(i, imagesPerPage, category).then(res => {     
+                  res.json().then(images => {
+                     images.forEach(img => {
+                        this.images.push(img);
+                     });
+                  });
                });
-            });
+            }
+         },
+         
+         fetchMultiplePagesBySearch: function(pages, imagesPerPage){
+            this.images = [];
+
+            for(let i = 1; i <= pages; i++){
+               this.unsplash.search.photos(this.searchText, i, imagesPerPage).then(res => {
+                  res.json().then(data => {
+                     data.results.forEach(img => {
+                        this.images.push(img);
+                     });
+                  });
+               });
+            }
          }
       }
    };
