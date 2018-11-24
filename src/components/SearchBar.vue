@@ -48,6 +48,10 @@
             </label>
          </form>
       </div>
+      
+      <div class="search-results-info">
+         <div class="total-results"></div>
+      </div>
 
       
    </div>
