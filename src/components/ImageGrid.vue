@@ -1,11 +1,12 @@
 <template>
    <div id="image-grid">
       
-      <div class="image-wrapper" v-for="(image, index) in images" :key="image.id">
+      <div class="image-wrapper" tabindex="0" v-for="(image, index) in images" :key="image.id">
          <div class="image" :data-image-position="index" 
             :style="{'background-image': `url(${image.urls.small})`}"
             v-on:click="openLightBox($event)">
          </div>
+         <div class="image-overlay"></div>
       </div>
 
       <LightBox :images="images" :activeImagePos="activeImagePos" :activeImage="activeImage" :lightBoxIsActive="lightBoxIsActive" 
@@ -85,6 +86,17 @@
          height: 200px;
          min-width: 200px;
          position: relative;
+         cursor: pointer;
+
+         &:hover, &:focus {
+            outline: none;
+
+            .image-overlay {
+               // display: block;
+               opacity: 0.25;
+               transition: opacity 150ms ease-in-out;
+            }
+         }
 
          .image {
             position: absolute;
@@ -94,6 +106,18 @@
             bottom: 0;
             background-size: cover;
             background-position: center;
+         }
+
+         .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: black;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 150ms ease-in-out;
          }
       }
    }
