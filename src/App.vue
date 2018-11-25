@@ -37,7 +37,7 @@
             unsplash: null,
             images: [],
             pages: 1, // used to keep track of pages of images retrieved from Unsplash (chunks of 30)
-            defaultCategory: 'popular', // possible categories: latest, oldest, popular 
+            defaultCategory: 'latest', // possible categories: latest, oldest, popular 
             searchText: null,
             activeLightBoxImage: null,
             scrolled: false,
@@ -75,7 +75,7 @@
                // Used to avoid the fetch to be fired multiple times, causing it to populate the grid with the same images 
                window.setTimeout(() => { 
                   this.isScrollBottom = false;
-               }, 100);
+               }, 200);
 
                if(this.searchText === null){ // No search made, fetch more images using defaultCategory 
                   this.fetchImages();
