@@ -75,7 +75,7 @@
                // Used to avoid the fetch to be fired multiple times, causing it to populate the grid with the same images 
                window.setTimeout(() => { 
                   this.isScrollBottom = false;
-               }, 200);
+               }, 300);
 
                if(this.searchText === null){ // No search made, fetch more images using defaultCategory 
                   this.fetchImages();
