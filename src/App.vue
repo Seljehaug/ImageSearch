@@ -36,10 +36,9 @@
             API_SECRET: null,
             unsplash: null,
             images: [],
-            pages: 1, // used to keep track of pages of images retrieved from Unsplash (chunks of 30)
+            pages: 1, // used to keep track of pages of images retrieved from Unsplash (chunks of max 30)
             defaultCategory: 'latest', // possible categories: latest, oldest, popular 
             searchText: null,
-            activeLightBoxImage: null,
             scrolled: false,
             isScrollBottom: false
          };
@@ -70,12 +69,7 @@
             const height = parseInt(d.offsetHeight);
 
             if (offset >= height - 200 && !this.isScrollBottom) {
-               this.isScrollBottom = true;
-
-               // Used to avoid the fetch to be fired multiple times, causing it to populate the grid with the same images 
-               window.setTimeout(() => { 
-                  this.isScrollBottom = false;
-               }, 300);
+               this.setFetchDelay(200);
 
                if(this.searchText === null){ // No search made, fetch more images using defaultCategory 
                   this.fetchImages();
@@ -116,6 +110,15 @@
                this.pages = this.pages + 1;
             });
          },
+
+         // Used to avoid the fetch to be fired multiple times, causing it to populate the grid with the same images 
+         setFetchDelay: function(ms) {
+            this.isScrollBottom = true;
+            
+            window.setTimeout(() => { 
+               this.isScrollBottom = false;
+            }, ms);
+         }
       }
    };
 </script>
