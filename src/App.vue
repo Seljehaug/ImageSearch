@@ -1,7 +1,6 @@
 <template>
    <div id="app">
       <div class="inner">
-         <Header/>
          <SearchBar :searchText="searchText" v-on:getSearchText="showSearchResults($event)"/>
          <ImageGrid :images="images"/>
       </div>
@@ -18,14 +17,12 @@
    import 'whatwg-fetch';
 
    // Components
-   import Header from './components/Header.vue';
    import SearchBar from './components/SearchBar.vue';
    import ImageGrid from './components/ImageGrid.vue';
 
    export default {
       name: 'app',
       components: {
-         Header,
          SearchBar,
          ImageGrid
       },
@@ -36,7 +33,7 @@
             API_SECRET: null,
             unsplash: null,
             images: [],
-            pages: 1, // used to keep track of pages of images retrieved from Unsplash (chunks of max 30)
+            pages: 0, // used to keep track of pages of images retrieved from Unsplash (chunks of max 30)
             defaultCategory: 'latest', // possible categories: latest, oldest, popular 
             searchText: null,
             scrolled: false,
@@ -55,7 +52,6 @@
          });
 
          this.fetchImages();
-         this.pages = this.pages + 1;
 
          window.addEventListener('scroll', this.handleScroll);
       },
@@ -86,9 +82,13 @@
                   images.forEach(img => {
                      this.images.push(img);
                   });
+               }).catch(err => {
+                  console.log(err);
                });
 
                this.pages = this.pages + 1;               
+            }).catch(err => {
+               console.log(err);
             });
          },
 
