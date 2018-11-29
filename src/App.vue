@@ -65,7 +65,7 @@
             const height = parseInt(d.offsetHeight);
 
             if (offset >= height - 200 && !this.isScrollBottom) {
-               this.setFetchDelay(200);
+               this.setFetchDelay(300);
 
                if(this.searchText === null){ // No search made, fetch more images using defaultCategory 
                   this.fetchImages();

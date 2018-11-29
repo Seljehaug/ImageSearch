@@ -80,6 +80,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      margin-top: calc(80px + 0.5rem);
 
       .image-wrapper {
          border: 1px solid white;
@@ -92,7 +93,6 @@
             outline: none;
 
             .image-overlay {
-               // display: block;
                opacity: 0.25;
                transition: opacity 150ms ease-in-out;
             }

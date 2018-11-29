@@ -9,6 +9,7 @@
    },
    "dependencies": {
       "autoprefixer": "^9.3.1",
+      "headroom.js": "^0.9.4",
       "normalize-scss": "^7.0.1",
       "promise-polyfill": "8.1.0",
       "unsplash-js": "^4.8.0",

@@ -55,10 +55,36 @@
 </template>
 
 <script>
+   import Headroom from 'headroom.js/dist/headroom.js';
+
    export default {
       name: 'SearchBar',
       props: {
          searchText: String
+      },
+
+      data() {
+         return {
+            searchBarElement: null
+         };
+      },
+
+      mounted() {
+         // Set up Headroom for showing/hiding search-bar on scroll
+         this.searchBarElement = document.getElementById('search-bar');
+         const headroom = new Headroom(this.searchBarElement, {
+            offset: this.searchBarElement.offsetHeight,
+            classes: {
+               initial: 'headroom',
+               pinned: 'scroll-up',
+               unpinned: 'scroll-down',
+               top: 'above-offset',
+               notTop: 'not-top',
+               bottom: 'bottom',
+               notBottom: 'not-bottom'
+            }
+         });
+         headroom.init();
       },
 
       methods: {
@@ -78,9 +104,37 @@
       align-items: center;
       justify-content: center;
       margin: 0 0 0.5rem 0;
-      background-color: rgba(67, 84, 133, 0.95);
-      position: relative;
-      
+      background-color: #4D5D8B;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      transition: top ease-in-out 300ms;
+      border-bottom: 2px solid transparent; 
+      z-index: 50;
+
+      &.scroll-up { // scrolling up
+         top: 0;
+         transition: top ease-in-out 300ms;
+         border-color: white;
+
+         #logo {
+            top: -2px; // same as border in #search-bar
+            transition: top ease-in-out 100ms;
+         }
+      }
+
+      &.scroll-down { // scrolling down
+         top: -80px;
+         transition: top ease-in-out 300ms;
+         border-color: transparent;
+
+         #logo {
+            top: 0;
+            transition: top ease-in-out 100ms;
+         }
+      }
+
       #logo {
          height: 80px;
          letter-spacing: 0.025rem;
@@ -90,11 +144,9 @@
          align-items: flex-start;
          flex-direction: column;
          justify-content: center;
-
-
          padding: 0.5rem;
          background: #39425c;
-         z-index: 100;
+         z-index: 50;
          top: 0;
 
          .logo-text-image {
@@ -117,6 +169,7 @@
          width: 100%;
          display: flex;
          align-items: center;
+         margin-top: 2px; // same as border-bottom on #search-bar
       }
 
       form {
