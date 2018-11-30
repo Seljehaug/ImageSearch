@@ -3,94 +3,97 @@
       
       <div class="overlay"></div>
 
-      <div class="controls-left">
-         <button v-on:click="prevImage" class="previous-btn">
-            <svg class="arrow arrow-left" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               width="451.847px" height="451.847px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;"
-               xml:space="preserve">
-               <g>
-                  <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-                  c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-                  c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z" />
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-            </svg>
-         </button>
-      </div>
+      <div class="lightbox-content">
 
-      <img :src="backgroundImage" alt="">
-      
-      <div class="controls-right">
-         <button v-on:click="nextImage" class="next-btn">
-            <svg class="arrow arrow-right" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               width="451.847px" height="451.847px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;"
-               xml:space="preserve">
-               <g>
-                  <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-                  c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-                  c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z" />
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-               <g>
-               </g>
-            </svg>
-         </button>
+         <div class="controls-left">
+            <button v-on:click="prevImage" class="previous-btn">
+               <svg class="arrow arrow-left" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="451.847px" height="451.847px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;"
+                  xml:space="preserve">
+                  <g>
+                     <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+                     c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+                     c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z" />
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+               </svg>
+            </button>
+         </div>
+
+         <img :src="backgroundImage" alt="" v-touch:swipe="handleSwipe">
+         
+         <div class="controls-right">
+            <button v-on:click="nextImage" class="next-btn">
+               <svg class="arrow arrow-right" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="451.847px" height="451.847px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;"
+                  xml:space="preserve">
+                  <g>
+                     <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+                     c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+                     c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z" />
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+               </svg>
+            </button>
+         </div>
 
          <button v-on:click="closeLightBox" class="close-btn">
             <svg class="close-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -133,6 +136,7 @@
                </g>
             </svg>
          </button>
+
       </div>
 
    </div>
@@ -167,12 +171,24 @@
          closeLightBox: function(){
             this.$emit('closeLightBox', false);
          },
+         
          prevImage: function(){
             this.$emit('prevImage');
          },
+         
          nextImage: function(){
             this.$emit('nextImage');
          },
+         
+         handleSwipe: function(direction) {
+            if(direction === 'left'){
+               this.prevImage();
+            }
+            if(direction === 'right'){
+               this.nextImage();
+            }
+         },
+
          handleKeyUp: function(event) {
             if(!this.lightBoxIsActive) return; 
             
@@ -212,20 +228,29 @@
                } 
             }
          }
-      }
+      },
+      
    };
 </script>
 
 <style scoped lang="scss">
+   .lightbox-content {
+      z-index: 50;
+      position: relative;
+      padding: 2rem 0;
+      background: black;
+   }
+
    #light-box {
       position: fixed;
-      top: 2rem;
-      left: 2rem;
-      right: 2rem;
-      bottom: 2rem;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: transparent;
       z-index: 100;
       background-size: cover;
+      padding: 3rem calc(3rem + 5vw);
 
       &.lightbox-active {
          display: flex;
@@ -241,8 +266,7 @@
          max-width: 100%;
          z-index: 100;
          background: black;
-         padding: 1rem 0;
-         max-height: 100%;
+         max-height: 80vh;
       }
    }
 
@@ -257,11 +281,19 @@
    }
 
    .controls-left, .controls-right {
-      position: relative;
-      height: 100%;
-      max-width: 5vw;
-      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 5vw;
       display: flex;
+   }
+
+   .controls-left {
+      left: -5vw;
+   }
+
+   .controls-right {
+      right: -5vw;
    }
 
    .previous-btn, .next-btn {
@@ -294,8 +326,8 @@
 
    .close-btn {
       position: absolute;
-      top: -0.5rem;
-      right: -0.5rem;
+      top: 0.5rem;
+      right: calc(-5vw - 0.5rem);
       z-index: 100;
       background: black;
       border-radius: 100%;
@@ -325,6 +357,40 @@
          width: 100%;
          height: 100%;
          fill: #d2d6df;
+      }
+   }
+
+   @media(max-width: 700px) {
+      #light-box {
+         .controls-left, .controls-right {
+            top: auto;
+            bottom: -2.25rem;
+            width: 50%;
+         }
+
+         .controls-left {
+            left: 0;
+            justify-content: flex-end;
+         }
+
+         .controls-right {
+            right: 0;
+            justify-content: flex-start;
+         }
+
+         .previous-btn, .next-btn {
+            border: 1px solid #cbcbcb;
+            border-radius: 3px;
+            padding: 0.5rem;
+            width: 70px;
+         }
+
+         .close-btn {
+            width: 35px;
+            height: 35px;
+            top: -1rem;
+            right: -2.5rem;
+         }
       }
    }
 </style>

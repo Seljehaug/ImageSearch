@@ -35,10 +35,16 @@
          return {
             activeImagePos: null,
             lightBoxIsActive: false,
-            activeImage: null
+            activeImage: null,
+            bodyElement: null,
+            bodyScrollableClass: 'content-no-scroll'
          };
       },
       
+      created() {
+         this.bodyElement = document.querySelector('body');
+      },
+
       methods: {
          openLightBox: function(event) {
             const imagePos = parseInt(event.target.dataset.imagePosition); 
@@ -49,10 +55,13 @@
             if(this.activeImage !== null){
                this.lightBoxIsActive = true;
             }
+
+            this.bodyElement.classList.add(this.bodyScrollableClass);
          },
 
          closeLightBox: function(status){
             this.lightBoxIsActive = status;
+            this.bodyElement.classList.remove(this.bodyScrollableClass);
          },
 
          prevImage: function(){
