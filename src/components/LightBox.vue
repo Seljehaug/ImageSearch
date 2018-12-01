@@ -1,9 +1,9 @@
 <template>
    <div id="light-box" :class="lightBoxClass">
       
-      <div class="overlay"></div>
+      <div class="overlay" v-touch:swipe="handleSwipe"></div>
 
-      <div class="lightbox-content">
+      <div class="lightbox-content" v-touch:swipe="handleSwipe">
 
          <div class="controls-left">
             <button v-on:click="prevImage" class="previous-btn">
@@ -49,7 +49,7 @@
             </button>
          </div>
 
-         <img :src="backgroundImage" alt="" v-touch:swipe="handleSwipe">
+         <img :src="backgroundImage" alt="">
          
          <div class="controls-right">
             <button v-on:click="nextImage" class="next-btn">
@@ -182,10 +182,10 @@
          
          handleSwipe: function(direction) {
             if(direction === 'left'){
-               this.prevImage();
+               this.nextImage();
             }
             if(direction === 'right'){
-               this.nextImage();
+               this.prevImage();
             }
          },
 
@@ -362,6 +362,10 @@
 
    @media(max-width: 700px) {
       #light-box {
+         .lightbox-content {
+            padding: 2rem;
+         }
+
          .controls-left, .controls-right {
             top: auto;
             bottom: -2.25rem;
@@ -390,6 +394,27 @@
             height: 35px;
             top: -1rem;
             right: -2.5rem;
+         }
+      }
+   }
+
+   @media(max-width: 700px) and (orientation: landscape) {
+      #light-box {
+         .lightbox-content {
+            margin-bottom: 1rem;
+            padding: 1rem;
+         }
+
+         .controls-left, .controls-right {
+            bottom: -2.25rem;
+         }
+
+         .close-btn {
+            top: 0;
+         }
+         
+         img {
+            max-height: 65vh;
          }
       }
    }
