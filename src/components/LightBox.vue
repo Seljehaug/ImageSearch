@@ -390,11 +390,31 @@
          }
 
          .close-btn {
+            position: fixed;
             width: 35px;
             height: 35px;
-            top: -1rem;
-            right: -2.5rem;
+            top: 0.5rem;
+            left: 0.5rem;
          }
+      }
+   }
+
+   @media(max-width: 700px) and (orientation: portrait) {
+      #light-box {
+         padding: 2rem 0;
+
+         .lightbox-content {
+            padding: 2rem 0;
+         }
+
+         .controls-left, .controls-right {
+            bottom: -1.25rem;
+         }
+
+         // .close-btn {
+         //    top: 0.5rem;
+         //    left: 0.5rem;
+         // }
       }
    }
 
@@ -402,16 +422,16 @@
       #light-box {
          .lightbox-content {
             margin-bottom: 1rem;
-            padding: 1rem;
+            padding: 1rem 0;
          }
 
          .controls-left, .controls-right {
             bottom: -2.25rem;
          }
 
-         .close-btn {
-            top: 0;
-         }
+         // .close-btn {
+         //    top: 0;
+         // }
          
          img {
             max-height: 65vh;
