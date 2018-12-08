@@ -410,11 +410,6 @@
          .controls-left, .controls-right {
             bottom: -1.25rem;
          }
-
-         // .close-btn {
-         //    top: 0.5rem;
-         //    left: 0.5rem;
-         // }
       }
    }
 
@@ -428,10 +423,6 @@
          .controls-left, .controls-right {
             bottom: -2.25rem;
          }
-
-         // .close-btn {
-         //    top: 0;
-         // }
          
          img {
             max-height: 65vh;
